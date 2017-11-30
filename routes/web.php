@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => '/pessoa'],  function(){
+    Route::get('/', 'PessoaController@listar');
+    Route::get('/form-cadastrar', 'PessoaController@formInserir');
+    Route::post('/cadastrar', 'PessoaController@inserir');
+    Route::get('/{id}/form-aletar', 'PessoaController@formAlterar');
+    Route::post('/{id}/alterar', 'PessoaController@alterar');
+    Route::get('/{id}/excluir', 'PessoaController@excluir');
+});
