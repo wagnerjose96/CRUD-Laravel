@@ -45,7 +45,7 @@ class PessoaController extends Controller
             abort(404);
         }
         $pessoa->delete();
-        return redirect()->to->('/pessoa/');
+        return redirect()->to('/pessoa/');
     }
 
     public function buscar($pesquisa)

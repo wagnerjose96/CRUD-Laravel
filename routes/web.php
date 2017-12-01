@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::group(['prefix' => '/pessoa'],  function(){
     Route::get('/', 'PessoaController@listar');
     Route::get('/form-cadastrar', 'PessoaController@formInserir');

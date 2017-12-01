@@ -23,7 +23,12 @@
                     <td>{{$pessoa->dataNacimento}}</td>
                     <td>
                         <a href="{{"/pessoa/{$pessoa->id}/form-aletar"}}">Editar</a>
-                        <a href="{{"/pessoa/{$pessoa->id}/excluir"}}">Excluir</a>
+                        <a href="{{"/pessoa/{$pessoa->id}/excluir"}}"
+                            onclick="event.preventDefault();
+                            if(confirm('Deseja excluir este registro?'))
+                                {window.location.href='{{"/admin/client/{$client->id}/excluir"}}'}">
+                            Excluir
+                        </a>
                     </td>
                 </tr>
             @endforeach
