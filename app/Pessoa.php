@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pessoa extends Model
 {
+    protected $table = 'singular';
     private $id;
     private $nome;
     private $cpf;
