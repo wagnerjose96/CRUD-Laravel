@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-require_once __DIR__ . '/../../database/faker_date/document_numeber.php';
+require_once __DIR__ . '/../faker_date/document_number.php';
 
 $factory->define(App\Pessoa::class, function (Faker $faker) {
     $cpfs = cpfs();

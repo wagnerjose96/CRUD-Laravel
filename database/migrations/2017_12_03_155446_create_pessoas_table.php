@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ItemPedido extends Migration
+class CreatePessoasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class ItemPedido extends Migration
      */
     public function up()
     {
-        Schema::create('item_pedido', function (Blueprint $table) {
+        Schema::create('pessoas', function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('produto'); //deve ser um produto
-            $table->double('quantidade');
-            $table->double('preco_unitario');
-            $table->double('percentual_desconto');
-            $table->double('total');
+            $table->string('nome');
+            $table->string('cpf');
+            $table->date('data_nascimento');
+            $table->timestamps();
         });
     }
 
@@ -30,6 +29,6 @@ class ItemPedido extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('pessoas');
     }
 }

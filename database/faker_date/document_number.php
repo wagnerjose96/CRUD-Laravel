@@ -1,7 +1,8 @@
 <?php
+
 function cpfs()
 {
-    return [
+    return [  //esses CPFS foram encontados na internet
         '18530249100',
         '29727693172',
         '09797904172',
