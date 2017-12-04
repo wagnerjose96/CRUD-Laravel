@@ -1,13 +1,6 @@
 @extends('layouts.layouts')
 @section('conteudo')
     <h3>Nova Pessoa</h3>
-    @if($erros->any())
-        <ul class="alert alert-danger">
-            @foreach($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ul>
-    @endif
     <form method="post" action="{{route('pessoas.store')}}">
         {{ csrf_field() }}
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
