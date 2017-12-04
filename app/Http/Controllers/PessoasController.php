@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Pessoa;
 use Illuminate\Http\Request;
+use Faker\Generator as Faker;
 
 class PessoasController extends Controller
 {
@@ -13,7 +15,8 @@ class PessoasController extends Controller
      */
     public function index()
     {
-        //
+        $pessoas = \App\Pessoa::all();
+        return view('pessoas.index', compact('pessoas'));
     }
 
     /**
@@ -23,7 +26,7 @@ class PessoasController extends Controller
      */
     public function create()
     {
-        //
+        return view('pessoas.create');
     }
 
     /**
@@ -32,9 +35,15 @@ class PessoasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Faker $faker)
     {
-        //
+        $data = $request->all();
+        $data['defaulter'] = $request->has('defaulter');
+        $id = $faker->uuid;
+        $arrayId = array('id' => $id);
+        $arrayPessoa = array_merge($arrayId, $data);
+        Pessoa::create($arrayPessoa);
+        return redirect()->to('/pessoas');
     }
 
     /**

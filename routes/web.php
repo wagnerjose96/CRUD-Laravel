@@ -12,9 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
-Route::group(['prefix' => 'pesssoa'], function (){
-    Route::resource('pessoas', 'PessoasController');
+Route::group([],function (){
+   Route::resource('pessoas', 'PessoasController');
 });

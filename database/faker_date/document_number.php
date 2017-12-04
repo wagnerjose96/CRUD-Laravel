@@ -94,3 +94,34 @@ function cpfs()
         '89518748187',
     ];
 }
+
+function produtos()
+{
+    return [
+        'leite em pó',
+        'coca cola',
+        'café',
+        'chocolate',
+        'macarrão',
+        'óleo',
+        'leite',
+        'mantega',
+        'adoçante',
+        'papel toalha',
+        'bacon',
+        'carne moida',
+        'açucar',
+        'água',
+        'linguiça',
+        'nescal',
+        'leite condençado',
+        'maçã',
+        'sal',
+        'shampoo',
+        'pão frances',
+        'queijo',
+        'mel',
+        'pasta de dente',
+        'protetor solar'
+];
+}
