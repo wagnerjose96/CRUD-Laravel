@@ -37,12 +37,17 @@ class PessoasController extends Controller
      */
     public function store(Request $request, Faker $faker)
     {
+//        $id = $faker->uuid;
+//        $arrayId = array('id' => $id);
+
+//        $this->validate($arrayId, [
+//            'id' => 'required'//não faz sentido ser requerido mas sim conferir se nao ha repetido dentro do banco
+//        ]);
+
+        $this->_validate($request);
         $data = $request->all();
         $data['defaulter'] = $request->has('defaulter');
-        $id = $faker->uuid;
-        $arrayId = array('id' => $id);
-        $arrayPessoa = array_merge($arrayId, $data);
-        Pessoa::create($arrayPessoa);
+        Pessoa::create($data);
         return redirect()->to('/pessoas');
     }
 
@@ -65,7 +70,8 @@ class PessoasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pessoa = Pessoa::findOrFail($id);
+        return view('pessoas.edit', compact('pessoa'));
     }
 
     /**
@@ -77,7 +83,12 @@ class PessoasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pessoa = Pessoa::findOrFail($id);
+        $this->_validate($request);
+        $data = $request->all();
+        $pessoa->fill($data);
+        $pessoa->save();
+        return redirect()->to('/pessoas');
     }
 
     /**
@@ -89,5 +100,14 @@ class PessoasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function _validate(Request $request)
+    {
+        $this->validate($request, [
+            'nome' => 'required|max:255|',
+            'cpf' => 'required|max:11',
+            'data_nascimento' => 'required|date',
+        ]);
     }
 }

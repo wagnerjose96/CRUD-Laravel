@@ -8,7 +8,7 @@ $factory->define(App\Produto::class, function (Faker $faker) {
     return [
         'id' => $faker->uuid,
         'codigo' => $faker->string,
-        'nome' => $nome_produtos[array_rand($nome_produtos, 1)],
+        'nome' => $nome_produtos(array_rand($nome_produtos, 1)),
         'preco' => $faker->double,
     ];
 });
