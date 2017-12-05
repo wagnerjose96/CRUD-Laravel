@@ -22,7 +22,7 @@
                 <td>{{ $pessoa->cpf }}</td>
                 <td>{{ $pessoa->data_nascimento }}</td>
                 <td>
-
+                    <a href="{{route('pessoas.edit', ['pessoa' => $pessoa->id])}}">Editar</a>
                 </td>
             </tr>
         @endforeach

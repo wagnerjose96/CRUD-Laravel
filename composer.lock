@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b713e5ab2c3fa60e3cead0628643fbf8",
+    "content-hash": "5eba86da256ddeb8084c32d3d10e18d3",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -218,66 +218,6 @@
             "time": "2017-11-15T23:40:40+00:00"
         },
         {
-            "name": "emadadly/laravel-uuid",
-            "version": "v1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/EmadAdly/laravel-uuid.git",
-                "reference": "c5e6edd2ecd4048e420fc2a3ae828fbb1982de58"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/EmadAdly/laravel-uuid/zipball/c5e6edd2ecd4048e420fc2a3ae828fbb1982de58",
-                "reference": "c5e6edd2ecd4048e420fc2a3ae828fbb1982de58",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.2.*|5.3.*|5.4.*|5.5.*",
-                "php": "~5.6|~7.0"
-            },
-            "require-dev": {
-                "laravel/framework": "5.2.*|5.3.*|5.4.*|5.5.*",
-                "phpunit/phpunit": "5.5.*",
-                "squizlabs/php_codesniffer": "^2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Emadadly\\LaravelUuid\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Emad Adly",
-                    "email": "thedevgist@gmail.com",
-                    "homepage": "http://devgist.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "laravel uuid a simple, automatic UUID generator for any model based on Laravel.",
-            "homepage": "https://github.com/emadadly/laravel-uuid",
-            "keywords": [
-                "Laravel UUID",
-                "emadadly",
-                "generator",
-                "guid",
-                "laravel",
-                "laravel-guid",
-                "laravel-uuid",
-                "uuid"
-            ],
-            "time": "2017-09-02T23:55:29+00:00"
-        },
-        {
             "name": "erusev/parsedown",
             "version": "1.6.4",
             "source": {
@@ -468,16 +408,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.5.22",
+            "version": "v5.5.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "2404af887ca8272d721628a99bbc721ac3b692e7"
+                "reference": "cb8ec95aa65fbaeeaf94026c8a9f04bb97c13777"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/2404af887ca8272d721628a99bbc721ac3b692e7",
-                "reference": "2404af887ca8272d721628a99bbc721ac3b692e7",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/cb8ec95aa65fbaeeaf94026c8a9f04bb97c13777",
+                "reference": "cb8ec95aa65fbaeeaf94026c8a9f04bb97c13777",
                 "shasum": ""
             },
             "require": {
@@ -597,7 +537,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-11-27T15:29:55+00:00"
+            "time": "2017-12-04T14:19:08+00:00"
         },
         {
             "name": "laravel/tinker",

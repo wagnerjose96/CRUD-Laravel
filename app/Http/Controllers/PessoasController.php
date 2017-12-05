@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Pessoa;
 use Illuminate\Http\Request;
-use Faker\Generator as Faker;
 
 class PessoasController extends Controller
 {
@@ -35,15 +34,13 @@ class PessoasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Faker $faker)
+    public function store(Request $request)
     {
+        $this->_validate($request);
         $data = $request->all();
-        $data['defaulter'] = $request->has('defaulter');
-        $id = $faker->uuid;
-        $arrayId = array('id' => $id);
-        $arrayPessoa = array_merge($arrayId, $data);
-        Pessoa::create($arrayPessoa);
-        return redirect()->to('/pessoas');
+        $data['defaulter'] = 0;
+        Pessoa::create($data);
+        return redirect()->route('pessoas.index');
     }
 
     /**
@@ -65,7 +62,8 @@ class PessoasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pessoa = Pessoa::findOrFail($id);
+        return view('pessoas.edit', compact('pessoa'));
     }
 
     /**
@@ -77,7 +75,13 @@ class PessoasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pessoa = Pessoa::findOrFail($id);
+        $this->_validate($request);
+        $data = $request->all();
+        $data['defaulter'] = 0;
+        $pessoa->fill($data);
+        $pessoa->save();
+        return redirect()->route('pessoas.index');
     }
 
     /**
@@ -90,4 +94,14 @@ class PessoasController extends Controller
     {
         //
     }
+
+    protected function _validate(Request $request)
+    {
+        $this->validate($request, [
+            'nome' => 'required|max:255',
+            'cpf' => 'required|max:11',
+            'data_nascimento' => 'required|date'
+        ]);
+    }
+
 }
