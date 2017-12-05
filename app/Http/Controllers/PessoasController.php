@@ -98,7 +98,10 @@ class PessoasController extends Controller
 
     private function _validate($request)
     {
-        $request->has('defaulter');
-        return $request;
+        $this->validate($request,[
+            'nome' => 'required|max:255',
+            'cpf' => 'required|max:11',
+            'data_nascimento' => 'required|date'
+        ]);
     }
 }
