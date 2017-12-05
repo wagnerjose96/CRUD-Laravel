@@ -36,7 +36,8 @@ class PessoasController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->_validate($request);
+        $data = $request->all();
+        $data['defaulter'] = $request->has('defaulter');
         Pessoa::create($data);
         return redirect()->route('pessoas.index');
 
@@ -70,15 +71,16 @@ class PessoasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $pessoa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, Pessoa $pessoa)
+    public function update(Request $request, Pessoa $pessoa)
     {
-        $this->_validate($request);
-        $pessoa->fill($request);
+        $data = $request->all();
+        $data['defaulter'] = $request->has('defaulter');
+        $pessoa->fill($data);
         $pessoa->save();
-        return redirect()->route('pessoa.index');
+        return redirect()->route('pessoas.index');
     }
 
     /**
@@ -97,5 +99,6 @@ class PessoasController extends Controller
     private function _validate($request)
     {
         $request->has('defaulter');
+        return $request;
     }
 }
