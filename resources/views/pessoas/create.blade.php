@@ -3,7 +3,7 @@
     <h3>Nova Pessoa</h3>
     @if($errors->any())
         <ul class="alert alert-danger">
-            @foreach($errors as $error)
+            @foreach($errors->all() as $error)
                 <li>{{$error}}</li>
             @endforeach
         </ul>

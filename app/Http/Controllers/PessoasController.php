@@ -31,12 +31,12 @@ class PessoasController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $this->_validate($request);
         $data['defaulter'] = $request->has('defaulter');
         Pessoa::create($data);
         return redirect()->route('pessoas.index');
@@ -46,7 +46,7 @@ class PessoasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -58,7 +58,7 @@ class PessoasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -70,13 +70,13 @@ class PessoasController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $pessoa
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $pessoa
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Pessoa $pessoa)
     {
-        $data = $request->all();
+        $data = $this->_validate($request);
         $data['defaulter'] = $request->has('defaulter');
         $pessoa->fill($data);
         $pessoa->save();
@@ -86,7 +86,7 @@ class PessoasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -96,12 +96,16 @@ class PessoasController extends Controller
         return redirect()->route('pessoas.index');
     }
 
-    private function _validate($request)
+    private function _validate(Request $request)
     {
+        $pessoa = $request->route('pessoa');
+        $pessoaId = $pessoa instanceof Pessoa ? $pessoa->id : null;
         $this->validate($request,[
-            'nome' => 'required|max:255',
-            'cpf' => 'required|max:11',
+//            'id' => "required|max:255|unique:pessoas,id,$pessoaId", //esse vai ser necessario se o UUID for se usado
+            'nome' => "required|max:255|unique:pessoas,nome,$pessoaId", //para deixar editar
+            'cpf' => "required|max:11|unique:pessoas,cpf,$pessoaId",
             'data_nascimento' => 'required|date'
         ]);
+        return $request->all();
     }
 }
