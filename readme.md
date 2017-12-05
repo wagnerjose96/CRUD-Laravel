@@ -15,3 +15,9 @@
     - DB_PASSWORD=
     - o resto pode deixar o jeito que vem no .env.example.
     - 
+    
+## Validação do CPF
+* nele usei um projeto disponivel no github sugerido por form de programação que achei ao pesquisar o assunto no google.
+* rodei esse comando - composer require codeedu/code_validator:0.0.2
+* como diz a documentação utiliza-se de um componete do zend para fazer a verificação
+* o procedimento de como usa-lo foi copiado, nao tenho certeza se essa é a melhor maneira.

@@ -103,7 +103,7 @@ class PessoasController extends Controller
         $this->validate($request,[
 //            'id' => "required|max:255|unique:pessoas,id,$pessoaId", //esse vai ser necessario se o UUID for se usado
             'nome' => "required|max:255|unique:pessoas,nome,$pessoaId", //para deixar editar
-            'cpf' => "required|max:11|unique:pessoas,cpf,$pessoaId",
+            'cpf' => "required|max:11|unique:pessoas,cpf,$pessoaId|valida_cpf",
             'data_nascimento' => 'required|date'
         ]);
         return $request->all();

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Code\Validator\Cpf;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +15,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \Schema::defaultStringLength(191);
+        \Validator::extend('valida_cpf', function ($attribute, $value, $parameters, $validator){
+            $documento = new Cpf();
+            return $documento->isValid($value);
+        });
     }
 
     /**
