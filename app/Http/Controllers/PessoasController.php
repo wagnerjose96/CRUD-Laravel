@@ -36,11 +36,10 @@ class PessoasController extends Controller
      */
     public function store(Request $request)
     {
-        $this->_validate($request);
-        $data = $request->all();
-        $data['defaulter'] = 0;
+        $data = $this->_validate($request);
         Pessoa::create($data);
         return redirect()->route('pessoas.index');
+
     }
 
     /**
@@ -51,7 +50,8 @@ class PessoasController extends Controller
      */
     public function show($id)
     {
-        //
+        $pessoa = Pessoa::findOrFail($id);
+        return view('pessoas.show', compact('pessoa'));
     }
 
     /**
@@ -73,15 +73,12 @@ class PessoasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, Pessoa $pessoa)
     {
-        $pessoa = Pessoa::findOrFail($id);
         $this->_validate($request);
-        $data = $request->all();
-        $data['defaulter'] = 0;
-        $pessoa->fill($data);
+        $pessoa->fill($request);
         $pessoa->save();
-        return redirect()->route('pessoas.index');
+        return redirect()->route('pessoa.index');
     }
 
     /**
@@ -92,23 +89,13 @@ class PessoasController extends Controller
      */
     public function destroy($id)
     {
-        $pessoa = Pessoa::find($id);
-//        $pessoa->delete();
-//        return redirect()->route('pessoas.index');
+        $pessoa = Pessoa::findOrFail($id);
+        $pessoa->delete();
+        return redirect()->route('pessoas.index');
     }
 
-    protected function _validate(Request $request)
+    private function _validate($request)
     {
-        $this->validate($request, [
-            'nome' => 'required|max:255',
-            'cpf' => 'required|max:11',
-            'data_nascimento' => 'required|date'
-        ]);
+        $request->has('defaulter');
     }
-
-    public function pesquisa (Pessoa $pessoa)
-    {
-        $pessoa = Pessoa::findOrFail($pessoa);
-    }
-
 }
