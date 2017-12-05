@@ -17,4 +17,5 @@ Route::get('/', function () {
 
 Route::group([],function (){
    Route::resource('pessoas', 'PessoasController');
+   Route::get('/pessoas/pesquisa/{pessoa}', 'PessoasController@pesquisa'); //essa rota é para a barra de pesquisa
 });

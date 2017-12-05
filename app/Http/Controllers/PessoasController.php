@@ -92,7 +92,9 @@ class PessoasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pessoa = Pessoa::find($id);
+//        $pessoa->delete();
+//        return redirect()->route('pessoas.index');
     }
 
     protected function _validate(Request $request)
@@ -102,6 +104,11 @@ class PessoasController extends Controller
             'cpf' => 'required|max:11',
             'data_nascimento' => 'required|date'
         ]);
+    }
+
+    public function pesquisa (Pessoa $pessoa)
+    {
+        $pessoa = Pessoa::findOrFail($pessoa);
     }
 
 }

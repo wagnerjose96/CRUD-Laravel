@@ -23,8 +23,21 @@
                 <td>{{ $pessoa->data_nascimento }}</td>
                 <td>
                     <a href="{{route('pessoas.edit', ['pessoa' => $pessoa->id])}}">Editar</a>
+                    <a href="{{route('pessoas.destroy', ['pessoa' => $pessoa->id])}}"
+                    onclick="event.preventDefault();
+                    if(confirm('Deseja mesmo excluir?'))
+                    {
+                        document.getElementById('form-delete').submit();
+                    }">Excluir
+                        <form id='form-delete' style="display: none" action="{{route('pessoas.destroy', ['pessoa' => $pessoa->id])}}" method="post">
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                        </form>
+                    </a>
+
                 </td>
             </tr>
+
         @endforeach
         </tbody>
     </table>
