@@ -22,3 +22,7 @@ Route::group([],function (){
 Route::group([],function (){
     Route::resource('produtos', 'ProdutosController');
 });
+
+Route::group([],function (){
+    Route::resource('item_pedidos', 'ItemPedidosController');
+});

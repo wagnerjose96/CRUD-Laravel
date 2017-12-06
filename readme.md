@@ -14,7 +14,9 @@
     - DB_USERNAME=root
     - DB_PASSWORD=
     - o resto pode deixar o jeito que vem no .env.example.
-    - 
+    - bastata anexar o arquivo crud_laravel.sql que esta na raiz do projeto ao banco de dados.
+
+* Com essa configuração já havera alguns registros para testes.
     
 ## Validação do CPF
 * nele usei um projeto disponivel no github sugerido por form de programação que achei ao pesquisar o assunto no google.
