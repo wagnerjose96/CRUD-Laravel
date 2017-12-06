@@ -29,5 +29,5 @@
         @endforeach
         </tbody>
     </table>
-    <a class="btn btn-default" href="{{route('pessoas.create')}}">Retornar</a>
+    <a class="btn btn-default" href="{{ '/' }}">Retornar</a>
 @endsection

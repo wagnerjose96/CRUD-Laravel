@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 Route::group([],function (){
-   Route::resource('pessoas', 'PessoasController');
+    Route::resource('pessoas', 'PessoasController');
 });
 
+Route::group([],function (){
+    Route::resource('produtos', 'ProdutosController');
+});

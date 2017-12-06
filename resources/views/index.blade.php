@@ -9,7 +9,7 @@
             <a class="btn btn-default" href="{{route('pessoas.index')}}">PESSOAS</a>
         </div>
         <div class="col-md-4">
-            <a class="btn btn-default">PRODUTOS</a>
+            <a class="btn btn-default" href="{{route('produtos.index')}}">PRODUTOS</a>
         </div>
         <div class="col-md-4">
             <a class="btn btn-default">PEDIDOS</a>
