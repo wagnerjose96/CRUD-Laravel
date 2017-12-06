@@ -97,6 +97,14 @@ class ProdutosController extends Controller
 
     private function _validate (Request $request)
     {
+        $produto = $request->route('produto');
+        $produtoId = $produto instanceof Produto ? $produto->id : null;
+        $this->validate($request,[
+//            'id' => "required|max:255|unique:produto,id,$produtoId", //esse vai ser necessario se o UUID for se usado
+            'codigo' => "required|max:10|unique:produtos,codigo,$produtoId",
+            'nome' => "required|max:255|unique:produtos,nome,$produtoId", //para deixar editar
+//            'preco' => "required|$produtoId",
+        ]);
         return $request->all();
     }
 }
