@@ -12,8 +12,7 @@
             <a class="btn btn-default" href="{{route('produtos.index')}}">PRODUTOS</a>
         </div>
         <div class="col-md-4">
-            <a class="btn btn-default">PEDIDOS</a>
-            <a class="btn btn-default" href="{{route('item_pedidos.index')}}">ITENS DE PEDIDOS</a>
+            <a class="btn btn-default" href="{{route('pedidos.index')}}">PEDIDOS</a>
         </div>
     </div>
 </div>

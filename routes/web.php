@@ -26,3 +26,7 @@ Route::group([],function (){
 Route::group([],function (){
     Route::resource('item_pedidos', 'ItemPedidosController');
 });
+
+Route::group([],function (){
+    Route::resource('pedidos', 'PedidosController');
+});
