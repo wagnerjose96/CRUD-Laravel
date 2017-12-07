@@ -2,27 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\ItemPedido;
 use Illuminate\Http\Request;
 
 class ItemPedidosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index() //não é necessario
     {
-        $itemPedidos = \App\ItemPedido::all();
-        return view('item_pedidos.index', compact('itemPedidos'));
+        //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create() //não é necessario redireiconar para uma pagina de criação de item pedidos, pois não haverá uma
     {
         //
     }
@@ -35,7 +25,9 @@ class ItemPedidosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->_validate($request);
+        $data['defaulter'] = $request->has('defaulter');
+        ItemPedido::create($data);
     }
 
     /**
@@ -46,7 +38,8 @@ class ItemPedidosController extends Controller
      */
     public function show($id)
     {
-        //
+        $itensPedidos = ItemPedido::where('produto_id', $id);
+        return $itensPedidos;
     }
 
     /**
@@ -80,6 +73,24 @@ class ItemPedidosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $itensPedido = ItemPedido::where('pedido_id',$id);
+        $itensPedido->delete();
     }
+
+    private function _validate($request)
+    {
+        $itemPedido = $request->route('item_pedido');
+        $itemPedidoId = $itemPedido instanceof ItemPedido ? $itemPedido->id : null;
+        $this->validate($request,[
+            'pedido_id' => "required,$itemPedidoId", //para deixar editar
+            'produto_id' => "required,$itemPedidoId",
+            'quantidade' => "required|numeric,$itemPedidoId",
+            'preco' => "required,$itemPedidoId",
+            'preco' => "required,$itemPedidoId",
+            'desconto' => "required,$itemPedidoId",
+            'total' => "required,$itemPedidoId",
+        ]);
+        return $request->all();
+    }
+
 }

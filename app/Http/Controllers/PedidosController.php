@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\ItemPedido;
+use App\Pedido;
+use App\Pessoa;
+use App\Produto;
 use Illuminate\Http\Request;
 
 class PedidosController extends Controller
@@ -24,7 +28,9 @@ class PedidosController extends Controller
      */
     public function create()
     {
-        //
+        $pessoas = Pessoa::all();
+        $produtos = Produto::all();
+        return view('pedidos.create', compact('pessoas', 'produtos'));
     }
 
     /**
@@ -35,7 +41,10 @@ class PedidosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->_validate($request);
+        $data['defaulter'] = $request->has('defaulter');
+        Pedido::create($data);
+        return redirect()->route('pedido.index');
     }
 
     /**
@@ -46,18 +55,13 @@ class PedidosController extends Controller
      */
     public function show($id)
     {
-        //
+        $pedido = ItemPedido::findOrFail($id);
+        return view ('pedidos.show', compact('pedido'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit($id) //não é ncessario colocar o edit
     {
-        //
     }
 
     /**
@@ -67,9 +71,13 @@ class PedidosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pedido $pedido)
     {
-        //
+        $data = $this->_validate($request);
+        $data['defaulter'] = $request->has('defaulter');
+        $pedido->fill($data);
+        $pedido->save();
+        return redirect()->route('pedidos.index');
     }
 
     /**
@@ -80,6 +88,23 @@ class PedidosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pedido = Pedido::findOrFail($id);
+        ItemPedido::destroy($id);
+        $pedido->delete();
+        return redirect()->route('pedidos.index');
+    }
+
+    public function _validate(Request $request)
+    {
+        $pedido = $request->route('pedido');
+        $pedidoId = $pedido instanceof Pedido ? $pedido->id : null;
+
+            $this->validate($request, [
+                'pessoa_id' => "required|max:255|unique:pessoas,nome,$pedidoId", //para deixar editar
+                'numero' => "required|max:11|unique:pessoas,cpf,$pedidoId",
+                'emissao' => 'required|date',$pedidoId,
+                'total' => 'required',$pedidoId,
+        ]);
+        return $request->all();
     }
 }
