@@ -78,8 +78,8 @@ class PedidosController extends Controller
     {
         $itens_pedido = ItemPedido::where('pedido_id', '=', $pedido->id);
         $cliente = Pessoa::findOrFail($pedido->pessoa_id);
-//        $produtos = Produto::where('id', $itens_pedido->produto_id);
-        return view('pedidos.show', compact('pedido','itens_pedido', 'cliente'));
+//        $produtos = Produto::where('id', '=',  $itens_pedido->produto_id);
+        return view('pedidos.show', compact('pedido','produto', 'cliente'));
     }
 
 

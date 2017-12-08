@@ -24,8 +24,13 @@
         </tr>
         {{--<tr>--}}
             {{--<th scope="row">Itens</th>--}}
-            {{--@foreach($itens_pedido as $item_pedido)--}}
-            {{--<td>{{$item_pedido->id}}</td>--}}
+            {{--<td>--}}
+                {{--<ul>--}}
+                    {{--@foreach($produtos as $produto)--}}
+                        {{--{{$produto->nome}}--}}
+                    {{--@endforeach--}}
+                {{--</ul>--}}
+            {{--</td>--}}
         {{--</tr>--}}
         <tr>
             <th scope="row">Emissão</th>

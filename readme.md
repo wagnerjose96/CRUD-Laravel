@@ -25,3 +25,5 @@
 * o procedimento de como usá-lo foi copiado, não tenho certeza se essa é a melhor maneira.
 
 ## Procedimento de como usar o sistema
+* se foi carregado o banco corretamente o projeto já vem com alguns dados para testes.
+* se não foi, basta fazer manualmente ou  usar o tinker do artisan do laravel e mandar ele fazer as factory de pessoa e produto, que já estão configuradas corretamente.

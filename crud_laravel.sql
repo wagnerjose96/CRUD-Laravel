@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 06-Dez-2017 às 04:09
+-- Generation Time: 08-Dez-2017 às 07:49
 -- Versão do servidor: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -25,6 +25,34 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `item_pedidos`
+--
+
+CREATE TABLE `item_pedidos` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `pedido_id` int(10) UNSIGNED NOT NULL,
+  `produto_id` int(10) UNSIGNED NOT NULL,
+  `quantidade` double NOT NULL,
+  `preco` double NOT NULL,
+  `desconto` double NOT NULL,
+  `total` double NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Extraindo dados da tabela `item_pedidos`
+--
+
+INSERT INTO `item_pedidos` (`id`, `pedido_id`, `produto_id`, `quantidade`, `preco`, `desconto`, `total`, `created_at`, `updated_at`) VALUES
+(3, 13, 18, 2, 2, 1222, 4, '2017-12-08 07:54:45', '2017-12-08 07:54:45'),
+(4, 14, 4, 12, 56.3, 13.268206039076391, 675.5999999999999, '2017-12-08 08:47:00', '2017-12-08 08:47:00'),
+(5, 14, 13, 54, 2, 710, 108, '2017-12-08 08:48:10', '2017-12-08 08:48:10'),
+(6, 15, 15, 18, 7, 664.8571428571429, 126, '2017-12-08 08:48:40', '2017-12-08 08:48:40');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `migrations`
 --
 
@@ -42,7 +70,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2017_12_04_221725_create_pessoas_table', 1),
-(4, '2017_12_05_233755_create_produtos_table', 2);
+(4, '2017_12_05_233755_create_produtos_table', 1),
+(5, '2017_12_06_034335_create_pedidos_table', 1),
+(6, '2017_12_06_034336_create_item_pedidos_table', 1);
 
 -- --------------------------------------------------------
 
@@ -55,6 +85,31 @@ CREATE TABLE `password_resets` (
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `pessoa_id` int(10) UNSIGNED NOT NULL,
+  `numero` int(11) NOT NULL,
+  `emissao` date NOT NULL,
+  `total` double NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Extraindo dados da tabela `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `pessoa_id`, `numero`, `emissao`, `total`, `created_at`, `updated_at`) VALUES
+(13, 1, 1, '2017-11-05', 4, '2017-12-08 07:54:45', '2017-12-08 07:54:45'),
+(14, 1, 2, '2017-11-05', 783.5999999999999, '2017-12-08 08:47:00', '2017-12-08 08:48:10'),
+(15, 9, 3, '2017-11-05', 126, '2017-12-08 08:48:40', '2017-12-08 08:48:40');
 
 -- --------------------------------------------------------
 
@@ -76,16 +131,16 @@ CREATE TABLE `pessoas` (
 --
 
 INSERT INTO `pessoas` (`id`, `nome`, `cpf`, `data_nascimento`, `created_at`, `updated_at`) VALUES
-(1, 'Dr. Garrett Jacobi PhD', '64760367187', '2011-12-24', '2017-12-06 05:08:29', '2017-12-06 05:08:29'),
-(2, 'Dr. Durward Maggio', '25884263104', '2012-03-31', '2017-12-06 05:08:29', '2017-12-06 05:08:29'),
-(3, 'Sim Kihn DVM', '33909245153', '1976-10-20', '2017-12-06 05:08:29', '2017-12-06 05:08:29'),
-(4, 'Prof. Robyn Bahringer', '61996467115', '2006-08-29', '2017-12-06 05:08:29', '2017-12-06 05:08:29'),
-(5, 'Aylin Lehner', '72056568187', '1976-08-09', '2017-12-06 05:08:29', '2017-12-06 05:08:29'),
-(6, 'Vincenza Hagenes', '69826838187', '1977-12-03', '2017-12-06 05:08:29', '2017-12-06 05:08:29'),
-(7, 'Miss Shanelle Hessel', '14970767149', '2016-11-27', '2017-12-06 05:08:29', '2017-12-06 05:08:29'),
-(8, 'Presley Ryan', '22104836115', '1975-04-10', '2017-12-06 05:08:29', '2017-12-06 05:08:29'),
-(9, 'Sallie Barrows', '04156528391', '1991-12-23', '2017-12-06 05:08:29', '2017-12-06 05:08:29'),
-(10, 'Ruthie Ortiz Sr.', '87555948168', '2003-08-30', '2017-12-06 05:08:29', '2017-12-06 05:08:29');
+(1, 'Eli Parisian Jr.', '47180021172', '2005-05-26', '2017-12-07 02:03:45', '2017-12-07 02:03:45'),
+(2, 'Presley Luettgen', '52434540104', '1978-04-05', '2017-12-07 02:03:45', '2017-12-07 02:03:45'),
+(3, 'Dr. Foster Veum', '76951863172', '1995-04-13', '2017-12-07 02:03:45', '2017-12-07 02:03:45'),
+(4, 'Caitlyn Bosco', '58451790178', '1981-01-20', '2017-12-07 02:03:45', '2017-12-07 02:03:45'),
+(5, 'Blaise Sauer III', '26251701153', '1974-05-24', '2017-12-07 02:03:45', '2017-12-07 02:03:45'),
+(6, 'Brenda Upton Sr.', '26251701153', '1973-05-10', '2017-12-07 02:03:45', '2017-12-07 02:03:45'),
+(7, 'Rodger Schultz III', '18433570110', '1999-02-15', '2017-12-07 02:03:45', '2017-12-07 02:03:45'),
+(8, 'Lucy Howell', '18872930782', '1982-04-23', '2017-12-07 02:03:45', '2017-12-07 02:03:45'),
+(9, 'Troy Johnston Jr.', '15319687168', '2012-01-06', '2017-12-07 02:03:45', '2017-12-07 02:03:45'),
+(10, 'Amos Hauck', '31357458134', '2013-05-24', '2017-12-07 02:03:45', '2017-12-07 02:03:45');
 
 -- --------------------------------------------------------
 
@@ -107,31 +162,31 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`id`, `codigo`, `nome`, `preco`, `created_at`, `updated_at`) VALUES
-(1, '212,218,114', 'açucar', 72, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(2, '90,130,48', 'maçã', 98.51, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(3, '228,152,243', 'café', 28.3, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(4, '182,37,70', 'carne moida', 87.15, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(5, '212,150,254', 'protetor solar', 28.71, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(6, '96,133,16', 'açucar', 48.99, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(7, '244,230,97', 'mel', 5.3, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(8, '211,185,8', 'café', 69.25, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(9, '231,186,134', 'coca cola', 84.45, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(10, '111,98,237', 'linguiça', 33.26, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(11, '16,44,217', 'café', 45.9, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(12, '8,31,55', 'coca cola', 9.64, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(13, '187,181,255', 'bacon', 1.97, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(14, '71,83,53', 'leite em pó', 71.15, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(15, '193,254,142', 'café', 57.39, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(16, '255,81,68', 'coca cola', 48.67, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(17, '201,69,217', 'chocolate', 79.87, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(18, '89,24,34', 'chocolate', 72.68, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(19, '134,177,204', 'bacon', 23.8, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(20, '70,220,112', 'chocolate', 98.09, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(21, '50,33,108', 'mantega', 51.74, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(22, '122,33,38', 'maçã', 99.45, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(23, '63,58,145', 'açucar', 80.6, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(24, '169,80,134', 'bacon', 76.28, '2017-12-06 05:08:45', '2017-12-06 05:08:45'),
-(25, '240,91,77', 'leite condençado', 54.32, '2017-12-06 05:08:45', '2017-12-06 05:08:45');
+(1, '80,89,237', 'papel toalha', 53.16, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(2, '200,153,5', 'sal', 66.51, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(3, '67,161,160', 'leite condençado', 71.61, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(4, '189,65,42', 'leite', 63.77, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(5, '180,142,131', 'protetor solar', 59.49, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(6, '100,66,208', 'protetor solar', 39.44, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(7, '133,190,164', 'mantega', 45.53, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(8, '253,101,169', 'óleo', 3.73, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(9, '173,246,101', 'pasta de dente', 38.89, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(10, '78,30,172', 'coca cola', 97.06, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(11, '159,46,59', 'mel', 86.36, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(12, '15,51,22', 'chocolate', 11.3, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(13, '128,125,196', 'pão frances', 16.2, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(14, '63,111,20', 'adoçante', 53.9, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(15, '22,160,238', 'leite em pó', 53.54, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(16, '14,2,227', 'maçã', 57.04, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(17, '200,35,221', 'queijo', 7.98, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(18, '57,146,33', 'leite', 26.44, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(19, '176,177,209', 'papel toalha', 21.66, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(20, '57,24,244', 'leite em pó', 93.69, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(21, '158,110,16', 'nescal', 38.48, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(22, '71,213,117', 'mantega', 86.44, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(23, '55,9,3', 'mantega', 18.98, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(24, '45,2,61', 'carne moida', 72, '2017-12-07 02:04:12', '2017-12-07 02:04:12'),
+(25, '200,86,21', 'nescal', 20.42, '2017-12-07 02:04:12', '2017-12-07 02:04:12');
 
 -- --------------------------------------------------------
 
@@ -154,6 +209,14 @@ CREATE TABLE `users` (
 --
 
 --
+-- Indexes for table `item_pedidos`
+--
+ALTER TABLE `item_pedidos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `item_pedidos_pedido_id_foreign` (`pedido_id`),
+  ADD KEY `item_pedidos_produto_id_foreign` (`produto_id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -164,6 +227,13 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pedidos_pessoa_id_foreign` (`pessoa_id`);
 
 --
 -- Indexes for table `pessoas`
@@ -189,10 +259,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `item_pedidos`
+--
+ALTER TABLE `item_pedidos`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `pessoas`
@@ -211,6 +293,23 @@ ALTER TABLE `produtos`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `item_pedidos`
+--
+ALTER TABLE `item_pedidos`
+  ADD CONSTRAINT `item_pedidos_pedido_id_foreign` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`),
+  ADD CONSTRAINT `item_pedidos_produto_id_foreign` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`);
+
+--
+-- Limitadores para a tabela `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_pessoa_id_foreign` FOREIGN KEY (`pessoa_id`) REFERENCES `pessoas` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
