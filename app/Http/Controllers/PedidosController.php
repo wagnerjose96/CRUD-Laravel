@@ -49,18 +49,24 @@ class PedidosController extends Controller
         $arrayNumero = array('numero' => $numero);
         $resultado = array_merge($data, $arrayNumero);
 
-        $itemPedido_pedido_id
-        $itemPedido_produto_id
-        $itemPedido_quantidade
-        $itemPedido_preco
-        $itemPedido_deconto
-        $itemPedido_total
+        $pedido = Pedido::create($resultado);
+
+
+        $itemPedido['pedido_id'] = $pedido->id;
+        $itemPedido['produto_id'] = $resultado['produto_id'];
+        $itemPedido['quantidade'] = $resultado['quantidade'];
+        $itemPedido['preco'] = $resultado['preco'];
+
+        $produto = Produto::where('id', $resultado['produto_id']);
+
+//        $itemPedido['desconto']
+        $itemPedido['total'] = $resultado['total'];
 
         echo "<pre>";
-        var_dump($resultado);
+        var_dump($produto);
         echo "</pre>";
 
-//        Pedido::create($resultado);
+
 //        return redirect()->route('item_pedidos.store');
     }
 
