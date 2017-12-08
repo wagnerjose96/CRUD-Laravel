@@ -57,49 +57,70 @@ class PedidosController extends Controller
         $itemPedido['quantidade'] = $resultado['quantidade'];
         $itemPedido['preco'] = $resultado['preco'];
 
-        $produto = Produto::where('id', $resultado['produto_id']);
+        $id_produto = $resultado['produto_id'];
+        $produto = Produto::findOrFail($id_produto);
 
-//        $itemPedido['desconto']
+        $itemPedido['desconto'] = (($produto->preco / $resultado['preco']) - 1) * 100;
         $itemPedido['total'] = $resultado['total'];
 
-        echo "<pre>";
-        var_dump($produto);
-        echo "</pre>";
+        ItemPedido::create($itemPedido);
 
-
-//        return redirect()->route('item_pedidos.store');
+        return redirect()->route('pedidos.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pedido $pedido)
     {
-        $pedido = ItemPedido::findOrFail($id);
-        return view ('pedidos.show', compact('pedido'));
+        $itens_pedido = ItemPedido::where('pedido_id', '=', $pedido->id);
+        $cliente = Pessoa::findOrFail($pedido->pessoa_id);
+//        $produtos = Produto::where('id', $itens_pedido->produto_id);
+        return view('pedidos.show', compact('pedido','itens_pedido', 'cliente'));
     }
 
 
-    public function edit($id) //não é ncessario colocar o edit
+    public function edit(Pedido $pedido)
     {
+        $produtos = Produto::all();
+        return view('pedidos.edit', compact('pedido', 'produtos'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $pedido
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Pedido $pedido)
     {
         $data = $this->_validate($request);
         $data['defaulter'] = $request->has('defaulter');
+
+        $itemPedido['pedido_id'] = $pedido->id;
+        $itemPedido['produto_id'] = $data['produto_id'];
+        $itemPedido['quantidade'] = $data['quantidade'];
+        $itemPedido['preco'] = $data['preco'];
+
+        $id_produto = $data['produto_id'];
+        $produto = Produto::findOrFail($id_produto);
+
+        $itemPedido['desconto'] = (($produto->preco / $data['preco']) - 1) * 100;
+        $itemPedido['total'] = $data['total'];
+        ItemPedido::create($itemPedido);
+
+        $pedidoAntigo = Pedido::findOrFail($pedido->id);
+        $valorAntigo = $pedidoAntigo->total;
+        $valorNovo = $valorAntigo + $data['total'];
+        $data['total'] = $valorNovo;
+
         $pedido->fill($data);
         $pedido->save();
+
         return redirect()->route('pedidos.index');
     }
 

@@ -1,12 +1,12 @@
 @extends('layouts.layouts')
 @section('conteudo')
-    <h3>Ver Pessoa</h3>
-    <a class="btn btn-primary" href="{{ route('pessoas.edit',['pessoa' => $pessoa->id]) }}">Editar</a>
-    <a class="btn btn-danger" href="{{ route('pessoas.destroy',['pessoa' => $pessoa->id]) }}"
+    <h3>Detalhes do Pedido</h3>
+    <a class="btn btn-primary" href="{{ route('pedidos.edit',['pedido' => $pedido->id]) }}">ADD Novo Item</a>
+    <a class="btn btn-danger" href="{{ route('pedidos.destroy',['pedido' => $pedido->id]) }}"
 
-       onclick="event.preventDefault();if(confirm('Deseja excluir este item?')){document.getElementById('form-delete').submit();}">Excluir</a>
+       onclick="event.preventDefault();if(confirm('Deseja excluir este item?')){document.getElementById('form-delete').submit();}">Excluir Pedido</a>
 
-    <form id="form-delete"style="display: none" action="{{ route('pessoas.destroy',['pessoa' => $pessoa->id]) }}" method="post">
+    <form id="form-delete"style="display: none" action="{{ route('pedidos.destroy',['pedido' => $pedido->id]) }}" method="post">
         {{csrf_field()}}
         {{method_field('DELETE')}}
     </form>
@@ -15,21 +15,27 @@
     <table class="table table-bordered">
         <tbody>
         <tr>
-            <th scope="row">ID</th>
-            <td>{{$pessoa->id}}</td>
+            <th scope="row">Cliente</th>
+            <td>{{$cliente->nome}}</td>
         </tr>
         <tr>
-            <th scope="row">Nome</th>
-            <td>{{$pessoa->nome}}</td>
+            <th scope="row">Númedo</th>
+            <td>{{$pedido->numero}}</td>
+        </tr>
+        {{--<tr>--}}
+            {{--<th scope="row">Itens</th>--}}
+            {{--@foreach($itens_pedido as $item_pedido)--}}
+            {{--<td>{{$item_pedido->id}}</td>--}}
+        {{--</tr>--}}
+        <tr>
+            <th scope="row">Emissão</th>
+            <td>{{$pedido->emissao}}</td>
         </tr>
         <tr>
-            <th scope="row">CPF</th>
-            <td>{{$pessoa->cpf}}</td>
+            <th scope="row">Total</th>
+            <td>{{$pedido->total}}</td>
         </tr>
-        <tr>
-            <th scope="row">Data Nascimento</th>
-            <td>{{$pessoa->data_nascimento}}</td>
-        </tr>
+
         </tbody>
     </table>
 @endsection
