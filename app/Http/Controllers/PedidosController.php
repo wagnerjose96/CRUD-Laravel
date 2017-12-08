@@ -127,13 +127,13 @@ class PedidosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pedido $pedido)
     {
-        $pedido = Pedido::findOrFail($id);
-        ItemPedido::destroy($id);
+        $itens_pedido = ItemPedido::where('pedido_id', '=', $pedido->id);
+        $itens_pedido->delete();
         $pedido->delete();
         return redirect()->route('pedidos.index');
     }
