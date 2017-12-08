@@ -41,10 +41,27 @@ class PedidosController extends Controller
      */
     public function store(Request $request)
     {
+        $numero = Pedido::select()->count();
+        $numero++;
+
         $data = $this->_validate($request);
         $data['defaulter'] = $request->has('defaulter');
-        Pedido::create($data);
-        return redirect()->route('pedido.index');
+        $arrayNumero = array('numero' => $numero);
+        $resultado = array_merge($data, $arrayNumero);
+
+        $itemPedido_pedido_id
+        $itemPedido_produto_id
+        $itemPedido_quantidade
+        $itemPedido_preco
+        $itemPedido_deconto
+        $itemPedido_total
+
+        echo "<pre>";
+        var_dump($resultado);
+        echo "</pre>";
+
+//        Pedido::create($resultado);
+//        return redirect()->route('item_pedidos.store');
     }
 
     /**
@@ -98,13 +115,13 @@ class PedidosController extends Controller
     {
         $pedido = $request->route('pedido');
         $pedidoId = $pedido instanceof Pedido ? $pedido->id : null;
-
-            $this->validate($request, [
-                'pessoa_id' => "required|max:255|unique:pessoas,nome,$pedidoId", //para deixar editar
-                'numero' => "required|max:11|unique:pessoas,cpf,$pedidoId",
-                'emissao' => 'required|date',$pedidoId,
-                'total' => 'required',$pedidoId,
-        ]);
+//
+//            $this->validate($request, [
+//                'pessoa_id' => "required,$pedidoId", //para deixar editar
+//                'numero' => "required,$pedidoId",
+//                'emissao' => "required|date,$pedidoId",
+//                'total' => "required,$pedidoId"
+//        ]);
         return $request->all();
     }
 }

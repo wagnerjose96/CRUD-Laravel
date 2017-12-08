@@ -25,9 +25,13 @@ class ItemPedidosController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->_validate($request);
-        $data['defaulter'] = $request->has('defaulter');
+        $data = _validate($request);
+        echo "<pre>";
+        var_dump($data);
+        echo "</pre>";
+
         ItemPedido::create($data);
+        return redirect()->route('pedidos.index');
     }
 
     /**
@@ -92,5 +96,4 @@ class ItemPedidosController extends Controller
         ]);
         return $request->all();
     }
-
 }

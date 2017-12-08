@@ -24,7 +24,7 @@
                 <td>{{ $pedido->emissao }}</td>
                 <td>{{ $pedido->total }}</td>
                 <td>
-                    <a href="{{route('pessoas.show', ['pessoa' => $pessoa->id])}}">Ver</a>
+{{--                    <a href="{{route('$pedidos.show', ['pedido' => $pedido->id])}}">Ver Detalhes</a>--}}
                 </td>
             </tr>
         @endforeach
